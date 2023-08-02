@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
+import 'pages/welcome_page.dart';
 
 void main() {
-  runApp(Spotify());
+  runApp(const MyApp());
 }
 
-class Spotify extends StatelessWidget {
-  const Spotify({Key? key}) : super(key: key);
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ;
+    return MaterialApp(
+      title: 'TunePulse',
+      debugShowCheckedModeBanner: false,
+      home: WelcomePage(),
+    );
   }
 }
-
