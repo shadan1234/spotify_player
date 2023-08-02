@@ -1,14 +1,16 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'dart:ui';
-import 'package:authui/components/my_button.dart';
-import 'package:authui/components/my_textfield.dart';
-import 'package:flutter/material.dart';
 
-class LoginPage extends StatelessWidget {
-  LoginPage({super.key});
+import 'package:spotify_clone/pages/login_page.dart';
+import 'package:flutter/material.dart';
+import 'package:spotify_clone/components/mybutton.dart';
+import 'package:spotify_clone/components/mytextfield.dart';
+import 'package:spotify_clone/components/squaretile.dart';
+
+class Signup extends StatelessWidget {
+  Signup({super.key});
 
   // text editing controllers
+  final usernameController = TextEditingController();
   final passwordController = TextEditingController();
 
   double _sigmaX = 5; // from 0-10
@@ -46,7 +48,7 @@ class LoginPage extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.07),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.05),
                   IconButton(
                     icon: const Icon(Icons.arrow_back_ios),
                     color: Colors.white,
@@ -55,7 +57,7 @@ class LoginPage extends StatelessWidget {
                     },
                   ),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.26),
-                  const Text("Log in",
+                  const Text("Sign Up",
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 40,
@@ -66,81 +68,94 @@ class LoginPage extends StatelessWidget {
                       filter:
                       ImageFilter.blur(sigmaX: _sigmaX, sigmaY: _sigmaY),
                       child: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
                         decoration: BoxDecoration(
-                            color: Color.fromRGBO(0, 0, 0, 1)
+                            color: const Color.fromRGBO(0, 0, 0, 1)
                                 .withOpacity(_opacity),
                             borderRadius:
                             const BorderRadius.all(Radius.circular(30))),
                         width: MediaQuery.of(context).size.width * 0.9,
-                        height: MediaQuery.of(context).size.height * 0.4,
+                        height: MediaQuery.of(context).size.height * 0.49,
                         child: Form(
                           key: _formKey,
                           child: Center(
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: [
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 25.0),
-                                  child: Row(children: [
-                                    const CircleAvatar(
-                                      radius: 30,
-                                      backgroundImage: NetworkImage(
-                                          'https://anmg-production.anmg.xyz/yaza-co-za_sfja9J2vLAtVaGdUPdH5y7gA'),
-                                    ),
-                                    SizedBox(
-                                        width:
-                                        MediaQuery.of(context).size.width *
-                                            0.05),
-                                    Column(
-                                      crossAxisAlignment:
-                                      CrossAxisAlignment.start,
-                                      // ignore: prefer_const_literals_to_create_immutables
-                                      children: [
-                                        Text("Jane Dow",
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 20,
-                                                fontWeight: FontWeight.bold)),
-                                        const SizedBox(height: 5),
-                                        Text("jane.doe@gmail.com",
-                                            style: const TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 18))
-                                      ],
-                                    )
-                                  ]),
+                                const Text(
+                                    "Look like you don't have an account. Let's create a new account for",
+                                    // ignore: prefer_const_constructors
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 20),
+                                    textAlign: TextAlign.start),
+                                // ignore: prefer_const_constructors
+                                const Text(
+                                  "jane.doe@gmail.com",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold),
+                                  textAlign: TextAlign.start,
                                 ),
-                                SizedBox(
-                                    height: MediaQuery.of(context).size.height *
-                                        0.03),
+                                const SizedBox(height: 30),
+
                                 MyTextField(
+                                  controller: usernameController,
+                                  hintText: 'Email',
+                                  obscureText: false,
+                                ),
+
+                                const SizedBox(height: 10),
+                                MyPasswordTextField(
                                   controller: passwordController,
                                   hintText: 'Password',
                                   obscureText: true,
                                 ),
-                                SizedBox(
-                                    height: MediaQuery.of(context).size.height *
-                                        0.03),
-                                MyButtonAgree(
-                                  text: "Continue",
-                                  onTap: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => LoginPage()));
-                                  },
-                                ),
                                 const SizedBox(height: 30),
-                                const Text('Forgot Password?',
-                                    style: TextStyle(
-                                        color:
-                                        Color.fromARGB(255, 71, 233, 133),
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 20),
-                                    textAlign: TextAlign.start),
+
+                                Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment:
+                                  CrossAxisAlignment.stretch,
+                                  children: [
+                                    RichText(
+                                      text: const TextSpan(
+                                        text: '',
+                                        children: <TextSpan>[
+                                          TextSpan(
+                                            text:
+                                            'By selecting Agree & Continue below, I agree to our ',
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 20),
+                                          ),
+                                          TextSpan(
+                                              text:
+                                              'Terms of Service and Privacy Policy',
+                                              style: TextStyle(
+                                                  color: Color.fromARGB(
+                                                      255, 71, 233, 133),
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 20)),
+                                        ],
+                                      ),
+                                    ),
+                                    const SizedBox(height: 10),
+                                    MyButtonAgree(
+                                      text: "Agree and Continue",
+                                      onTap: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    LoginPage()));
+                                      },
+                                    ),
+                                  ],
+                                ),
                               ],
                             ),
                           ),
