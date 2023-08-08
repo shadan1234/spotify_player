@@ -1,8 +1,8 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'dart:ui';
-import 'package:authui/components/mybutton.dart';
-import 'package:authui/components/mytextfield.dart';
+import 'package:spotify_player/components/mybutton.dart';
+import 'package:spotify_player/components/mytextfield.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatelessWidget {

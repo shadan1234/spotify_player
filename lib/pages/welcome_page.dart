@@ -1,13 +1,16 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:spotify_clone/components/mybutton.dart';
-import 'package:spotify_clone/components/mytextfield.dart';
-import 'package:spotify_clone/components/squaretile.dart';
-import 'package:spotify_clone/pages/signup.dart';
+import 'package:spotify_player/components/mytextfield.dart';
+import 'package:spotify_player/components/mybutton.dart';
+import 'package:spotify_player/components/squaretile.dart';
+import 'package:spotify_player/pages/home_page.dart';
+import 'package:spotify_player/pages/signup.dart';
 
 class WelcomePage extends StatelessWidget {
-  WelcomePage({Key? key}) : super(key: key);
+  WelcomePage({super.key});
 
   // text editing controllers
   final usernameController = TextEditingController();
@@ -28,7 +31,7 @@ class WelcomePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.grey[300],
       body: SingleChildScrollView(
-        child: SizedBox(
+        child: Container(
           height: MediaQuery.of(context).size.height,
           child: Stack(
             alignment: Alignment.center,
@@ -38,12 +41,6 @@ class WelcomePage extends StatelessWidget {
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height,
                 fit: BoxFit.cover,
-                errorBuilder: (context, error, stackTrace) {
-                  // Display a placeholder image when the network image fails to load
-                  return Container(
-                    color: Colors.grey[600],
-                  );
-                },
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -63,13 +60,15 @@ class WelcomePage extends StatelessWidget {
                   SizedBox(height: MediaQuery.of(context).size.height * 0.02),
                   ClipRect(
                     child: BackdropFilter(
-                      filter: ImageFilter.blur(sigmaX: _sigmaX, sigmaY: _sigmaY),
+                      filter:
+                      ImageFilter.blur(sigmaX: _sigmaX, sigmaY: _sigmaY),
                       child: Container(
                         padding: const EdgeInsets.symmetric(horizontal: 10),
                         decoration: BoxDecoration(
-                          color: Color.fromRGBO(0, 0, 0, 1).withOpacity(_opacity),
-                          borderRadius: BorderRadius.all(Radius.circular(30)),
-                        ),
+                            color: Color.fromRGBO(0, 0, 0, 1)
+                                .withOpacity(_opacity),
+                            borderRadius:
+                            BorderRadius.all(Radius.circular(30))),
                         width: MediaQuery.of(context).size.width * 0.9,
                         height: MediaQuery.of(context).size.height * 0.63,
                         child: Form(
@@ -91,16 +90,17 @@ class WelcomePage extends StatelessWidget {
                                 // sign in button
                                 MyButton(
                                   onTap: (() {
-                                    if (_formKey.currentState!.validate()) {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => Signup(),
-                                        ),
-                                      );
-                                    } else {
-                                      print('invalid');
-                                    }
+                                    //TODO commenting for a while to test home_page
+                                  //   if (_formKey.currentState!.validate()) {
+                                  //     Navigator.push(
+                                  //       context,
+                                  //       MaterialPageRoute(
+                                  //           builder: (context) => Signup()),
+                                  //     );
+                                  //   } else {
+                                  //     print('not valid');
+                                  //   }
+                                    Navigator.push(context,MaterialPageRoute(builder: (context)=>Home_page()));
                                   }),
                                 ),
 
@@ -116,8 +116,8 @@ class WelcomePage extends StatelessWidget {
                                       ),
                                     ),
                                     const Padding(
-                                      padding:
-                                      EdgeInsets.symmetric(horizontal: 10.0),
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: 10.0),
                                       child: Text(
                                         'Or',
                                         style: TextStyle(
@@ -144,7 +144,8 @@ class WelcomePage extends StatelessWidget {
                                     children: const [
                                       // facebook button
                                       SquareTile(
-                                          imagePath: 'assets/images/facebook.png',
+                                          imagePath:
+                                          'assets/images/facebook.png',
                                           title: "Continue with Facebook"),
                                       SizedBox(height: 10),
 
@@ -172,41 +173,44 @@ class WelcomePage extends StatelessWidget {
                                   child: Column(
                                     mainAxisSize: MainAxisSize.min,
                                     mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                                    crossAxisAlignment:
+                                    CrossAxisAlignment.stretch,
                                     children: [
                                       Row(
-                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        mainAxisAlignment:
+                                        MainAxisAlignment.start,
                                         // ignore: prefer_const_literals_to_create_immutables
                                         children: [
                                           Text(
                                             'Don\'t have an account?',
                                             style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 20,
-                                            ),
+                                                color: Colors.white,
+                                                fontSize: 20),
                                             textAlign: TextAlign.start,
                                           ),
                                           const SizedBox(width: 4),
                                           const Text(
                                             'Sign Up',
                                             style: TextStyle(
-                                              color: Color.fromARGB(255, 71, 233, 133),
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 20,
-                                            ),
+                                                color: Color.fromARGB(
+                                                    255, 71, 233, 133),
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 20),
                                           ),
                                         ],
                                       ),
-                                      SizedBox(height: MediaQuery.of(context).size.height * 0.01),
-                                      const Text(
-                                        'Forgot Password?',
-                                        style: TextStyle(
-                                          color: Color.fromARGB(255, 71, 233, 133),
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 20,
-                                        ),
-                                        textAlign: TextAlign.start,
-                                      ),
+                                      SizedBox(
+                                          height: MediaQuery.of(context)
+                                              .size
+                                              .height *
+                                              0.01),
+                                      const Text('Forgot Password?',
+                                          style: TextStyle(
+                                              color: Color.fromARGB(
+                                                  255, 71, 233, 133),
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 20),
+                                          textAlign: TextAlign.start),
                                     ],
                                   ),
                                 ),
@@ -218,7 +222,7 @@ class WelcomePage extends StatelessWidget {
                     ),
                   ),
                 ],
-              ),
+              )
             ],
           ),
         ),
@@ -226,4 +230,3 @@ class WelcomePage extends StatelessWidget {
     );
   }
 }
-
